@@ -1,0 +1,12 @@
+  version: '3'
+  services:
+     messaging:
+        image: 'rabbitmq:3-management'
+        environment:
+          RABBITMQ_DEFAULT_USER: example
+          RABBITMQ_DEFAULT_PASS: example 
+        ports:
+          -  15672:15672
+
+
+  

@@ -1,0 +1,18 @@
+CREATE TABLE car ( 
+	car_id INTEGER,
+       make VARCHAR(64) NOT NULL,
+	model VARCHAR(256) NOT NULL,
+	year DECIMAL(4, 0) NOT NULL,
+	PRIMARY KEY(car_id)
+
+);
+
+CREATE TABLE part (
+	part_id INTEGER,
+	name VARCHAR(256) NOT NULL,
+	description VARCHAR(1024),
+	manufacturers_partum VARCHAR(256),
+	PRICE DECIMAL(10, 2),
+	PRIMARY KEY(part_id)
+);
+
