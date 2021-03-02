@@ -1,7 +1,4 @@
-
-FROM node:12.16.2
-COPY ./app/ /home/node/app
-WORKDIR /home/node/app
-RUN npm install
-CMD sh -c 'sleep 15; npm start'
-
+FROM python
+COPY . /app
+RUN pip install -r requirements.txt
+CMD ["python","app.py"]

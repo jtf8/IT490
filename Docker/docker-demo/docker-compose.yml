@@ -22,7 +22,7 @@
      volumes:
        - "../db-demo:/docker-entrypoint-initdb.d"
    back-end:
-    build: .
+    build: ./back-end-demo
     environment:
       - NODE-ENV=development
       - MSG_USER=${MSG_USER}
