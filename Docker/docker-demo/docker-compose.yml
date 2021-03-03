@@ -1,33 +1,41 @@
- version: "3"
+ version: "3.1"
  services:
    front-end:
      build: ./front-end-demo
      ports:
-       - "8080:80"
+       - "5000:5000"
      environment:
-       - MSG_USER=${MSG_USER}
-       - MSG_PASS=${MSG_PASS}
+        - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+        - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+        - FLASK_ENV= development
+        - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
    messaging:
       image: rabbitmq:3.8.3
       environment:
-        - RABBITMQ_DEFAULT_USER=${MSG}
-        - RABBITMQ_DEFAULT_PASS=${MSG_PASS}
+        - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+        - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+        - RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}
+      ports:
+        - "15672:15672"
    db:
-     image: mariadb:10.5.3
+     image: postgres
+     restart: always
      environment:
-       - MYSQL_USER=${DB_USER}
-       - MYSQL_PASSWORD=${DB_PASS}
-       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
-       - MYSQL_DATABASE=${DB_DATABASE}
+       - POSTGRES_DB=ourDB       
+       - POSTGRES_USER=${DB_ROOT_USER}
+       - POSTGRES_PASSWORD=${DB_ROOT_PASS}
      volumes:
-       - "../db-demo:/docker-entrypoint-initdb.d"
-   back-end:
-    build: ./back-end-demo
-    environment:
-      - NODE-ENV=development
-      - MSG_USER=${MSG_USER}
-      - MSG_PASS=${MSG-PASS}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
-      - DB_DATABASE=${DB_DATABASE} 
-
+       - "./db/:/docker-entrypoint-initdb.d"
+       - "db-data:/var/lib/postgresql/data"
+   adminer:
+      image: adminer
+      restart: always
+      ports:
+      - "8080:8080"      
+#   back-end:
+#    build: ./back-end-demo
+#    environment:
+#      - NODE-ENV=development
+##     - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+ volumes:
+  db-data:
