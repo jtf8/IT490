@@ -34,11 +34,19 @@
          - "8080:8080"      
    back-end:
      build: ./back-end-demo
-   
      environment:
-       NODE-ENV: ${development}
-       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+       NODE_ENV: development
+       MSG_USER: ${MSG_USER}
+       MSG_PASS: ${MSG_PASS}
+       DB_USER : ${DB_USER}
+       DB_PASS: ${DB_PASS}
+       DB_DATABASE: ${DB_DATABASE}
 
-   volumes:
-     data-volume:
+   
+   environment: 
+     NODE-ENV: development
+     RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+
+#volumes
+#data-volume
 

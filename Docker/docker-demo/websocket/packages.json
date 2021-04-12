@@ -1,0 +1,13 @@
+{
+	"name": "websocket_demo",
+	"version": "1.0.0",
+	"description" : "Using react with RabbitMQ via WebSockets",
+	"author": "IT490 Group 5",
+	"main": "server.js",
+	"scripts": {
+		"express": "^4.17.1",
+		"ws": "^7.3.1",
+		"amqplib": "^0.7.0"
+	}
+}
+
