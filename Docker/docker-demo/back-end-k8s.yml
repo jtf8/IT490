@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: development 
+metadata:
+  name: back-end
+  labels:
+    app: back-end-demo
+spec:
+  replicas: 3
+  selector:
+    macthLabels:
+      app: back-end-demo
+  template:
+    metadata:
+      labels:
+        app: back-end-demo
+    spec:
+      containers:
+        - name: back-end-demo
+          image: back-end-demo:v1
+
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value:"guest"
+            - name: RABBITMQ_DEFAULT-PASS
+              value: "guest"
+            - name: POSTGRES_PASSWORD
+              value: "changeme'
