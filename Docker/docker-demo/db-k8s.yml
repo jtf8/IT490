@@ -111,7 +111,7 @@ spec:
           persistentVolumeClaim:
             claimName: db-primary-pv-claim
 #end::db-rw-deployment[]
-
+#comemnr
 #tag::db-r-deployment[]
 ---
 apiVersion: apps/v1
