@@ -1,12 +1,9 @@
-\connect "ourDB";
+SELECT 'CREATE DATABASE covidtesting'
+WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'mydb')\gexec
 
-
-CREATE TABLE "public"."users" (
-    "email" character(50) NOT NULL,
-    "password" character(50) NOT NULL,
-    CONSTRAINT "users_pkey" PRIMARY KEY ("email")
-) WITH (oids = false);
-
-INSERT INTO "users" ("email", "password") VALUES
-('kca2@njit.edu                                                              ',	'testing'),
-('test@njit.edu                                                              ',	'test');
+CREATE DATABASE covidtesting;
+\c example
+CREATE TABLE users(
+    email VARCHAR(255) PRIMARY KEY,
+    password VARCHAR(255) NOT NULL
+);
